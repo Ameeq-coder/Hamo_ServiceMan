@@ -9,6 +9,13 @@ import 'package:hamo_service_man/Auth/BLOC/login_bloc.dart';
 import 'package:hamo_service_man/Auth/BLOC/login_event.dart';
 import 'package:hamo_service_man/Auth/BLOC/login_state.dart';
 
+import '../../CalenderScreen/BLOC/calender_bloc.dart';
+import '../../CalenderScreen/CalenderScreen.dart';
+import '../../CalenderScreen/Repositry/calendar_repository.dart';
+import '../../Profile/BLOC/profile_bloc.dart';
+import '../../Profile/Profile.dart';
+import '../../Profile/REPO/ProfileRepo.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   State<LoginScreen> createState() => _LoginScreenState();
@@ -53,10 +60,18 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           } else if (state is AuthSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text("Login Successful! Token: ${state.token}")),
+              SnackBar(content: Text("Login Successful!")),
             );
-            // Navigate to another screen if needed
-            // Navigator.pushReplacement(...);
+            // FIX: Wrap ProfileScreen with BlocProvider
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BlocProvider(
+                  create: (context) => ProfileBloc(ProfileRepository()),
+                  child: ProfileScreen(),
+                ),
+              ),
+            );
           }
         },
         builder: (context, state) {
@@ -219,7 +234,6 @@ class SocialIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-
       height: 50,
       width: 50,
       decoration: BoxDecoration(

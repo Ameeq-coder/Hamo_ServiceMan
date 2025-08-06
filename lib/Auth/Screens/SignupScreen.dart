@@ -3,6 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hamo_service_man/Auth/Repositry/SignupRepositry.dart';
 import 'package:hive/hive.dart';
 import 'package:hive/hive.dart';
+import '../../ServiceMenDetail/BLOC/service_detail_bloc.dart';
+import '../../ServiceMenDetail/REPO/ServiceDetailRepository.dart';
+import '../../ServiceMenDetail/Screens/ServiceDetailScreen.dart';
 import '../bloc/signup_bloc.dart';
 import '../bloc/signup_event.dart';
 import '../bloc/signup_state.dart';
@@ -169,6 +172,16 @@ class _SignupScreenState extends State<SignupScreen> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Signup Success!')),
                       );
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider(
+                            create: (_) => ServiceDetailBloc(ServiceDetailRepository()),
+                            child: const ServiceDetailScreen(),
+                          ),
+                        ),
+                      );
+
                     } else if (state is SignupFailure) {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text('Signup Failed: ${state.error}')),
@@ -182,13 +195,30 @@ class _SignupScreenState extends State<SignupScreen> {
                         onPressed: state is SignupLoading
                             ? null
                             : () {
-                          BlocProvider.of<SignupBloc>(context).add(
-                            SignupSubmitted(
-                              email: emailController.text.trim(),
-                              password: passwordController.text.trim(),
-                              serviceType: selectedServiceType,
-                            ),
-                          );
+                          final email = emailController.text.trim();
+                          final password = passwordController.text.trim();
+
+                          if (email.isEmpty || !email.contains('@')) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Please enter a valid email.')),
+                            );
+                          } else if (password.isEmpty || password.length < 6) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Password must be at least 6 characters long.')),
+                            );
+                          } else if (selectedServiceType.isEmpty) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text('Please select a service type.')),
+                            );
+                          } else {
+                            BlocProvider.of<SignupBloc>(context).add(
+                              SignupSubmitted(
+                                email: email,
+                                password: password,
+                                serviceType: selectedServiceType,
+                              ),
+                            );
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.purple,

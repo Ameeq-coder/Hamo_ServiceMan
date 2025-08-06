@@ -15,11 +15,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => SignupBloc(signupRepository: SignupRepository()),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home:SignupScreen(),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: BlocProvider(
+        create: (context) => AuthBloc(AuthRepository()),
+        child: LoginScreen(),
       ),
     );
   }
