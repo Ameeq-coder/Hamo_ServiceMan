@@ -11,6 +11,7 @@ class AllBooking {
   final int price;
   final String userName;
   final String userImage;
+  final String serviceManName; // <== ADD THIS LINE
 
   AllBooking({
     required this.id,
@@ -25,6 +26,7 @@ class AllBooking {
     required this.price,
     required this.userName,
     required this.userImage,
+    required this.serviceManName, // <== ADD THIS LINE
   });
 
   factory AllBooking.fromJson(Map<String, dynamic> json) {
@@ -41,6 +43,7 @@ class AllBooking {
       price: json['price'],
       userName: json['user']['details']['name'],
       userImage: json['user']['details']['imageUrl'],
+      serviceManName: json['serviceManName'], // <== ADD THIS LINE
     );
   }
 }

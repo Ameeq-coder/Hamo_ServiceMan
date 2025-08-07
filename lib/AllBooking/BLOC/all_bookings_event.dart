@@ -8,7 +8,7 @@ abstract class AllBookingsEvent extends Equatable {
 class FetchAllBookingsEvent extends AllBookingsEvent {
   final String servicemanId;
 
-  FetchAllBookingsEvent(this.servicemanId);
+  FetchAllBookingsEvent(this.servicemanId); // Only positional
 
   @override
   List<Object> get props => [servicemanId];

@@ -9,6 +9,9 @@ import 'package:hamo_service_man/Auth/BLOC/login_bloc.dart';
 import 'package:hamo_service_man/Auth/BLOC/login_event.dart';
 import 'package:hamo_service_man/Auth/BLOC/login_state.dart';
 
+import '../../AllBooking/BLOC/all_bookings_bloc.dart';
+import '../../AllBooking/REPO/AllBookingRepo.dart';
+import '../../AllBooking/SCREEN/MyBooking.dart';
 import '../../CalenderScreen/BLOC/calender_bloc.dart';
 import '../../CalenderScreen/CalenderScreen.dart';
 import '../../CalenderScreen/Repositry/calendar_repository.dart';
@@ -67,8 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
               context,
               MaterialPageRoute(
                 builder: (context) => BlocProvider(
-                  create: (context) => ProfileBloc(ProfileRepository()),
-                  child: ProfileScreen(),
+                  create: (context) => AllBookingsBloc(AllBookingsRepository()),
+                  child: MyBookingMain(),
                 ),
               ),
             );
