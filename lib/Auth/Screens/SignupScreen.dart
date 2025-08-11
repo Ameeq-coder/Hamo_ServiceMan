@@ -176,7 +176,7 @@ class _SignupScreenState extends State<SignupScreen> {
                         context,
                         MaterialPageRoute(
                           builder: (_) => BlocProvider(
-                            create: (_) => ServiceDetailBloc(ServiceDetailRepository()),
+                            create: (_) => ServiceDetailsBloc(ServiceDetailRepository()),
                             child: const ServiceDetailScreen(),
                           ),
                         ),

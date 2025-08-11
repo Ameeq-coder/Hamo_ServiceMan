@@ -3,10 +3,10 @@ import '../REPO/ServiceDetailRepository.dart';
 import 'service_detail_event.dart';
 import 'service_detail_state.dart';
 
-class ServiceDetailBloc extends Bloc<ServiceDetailEvent, ServiceDetailState> {
+class ServiceDetailsBloc extends Bloc<ServiceDetailEvent, ServiceDetailState> {
   final ServiceDetailRepository repository;
 
-  ServiceDetailBloc(this.repository) : super(ServiceDetailInitial()) {
+  ServiceDetailsBloc(this.repository) : super(ServiceDetailInitial()) {
     on<SubmitServiceDetailEvent>((event, emit) async {
       emit(ServiceDetailLoading());
       try {

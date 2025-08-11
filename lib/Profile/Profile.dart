@@ -84,6 +84,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ),
                 ),
               ),
+              bottomNavigationBar: BottomNavigation(currentIndex: 4),
             );
           }
 

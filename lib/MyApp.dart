@@ -9,6 +9,7 @@ import 'package:hamo_service_man/Auth/Screens/Login.dart';
 import 'package:hamo_service_man/Auth/Screens/SignupScreen.dart';
 
 import 'CalenderScreen/CalenderScreen.dart';
+import 'Chat/Screen/ChatList.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
         create: (context) => AuthBloc(AuthRepository()),
-        child: LoginScreen(),
+        child: ChatScreen(),
       ),
     );
   }

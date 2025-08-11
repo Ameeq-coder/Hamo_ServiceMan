@@ -76,7 +76,7 @@ class MyBookingMain extends StatelessWidget {
               ],
             ),
           ),
-          // bottomNavigationBar: BottomNavigation(currentIndex: 0),
+          bottomNavigationBar: BottomNavigation(currentIndex: 1),
         ),
       ),
     );

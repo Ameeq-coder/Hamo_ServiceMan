@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hamo_service_man/Auth/BLOC/login_bloc.dart';
 import 'package:hamo_service_man/Auth/BLOC/login_event.dart';
 import 'package:hamo_service_man/Auth/BLOC/login_state.dart';
+import 'package:hive/hive.dart';
 
 import '../../AllBooking/BLOC/all_bookings_bloc.dart';
 import '../../AllBooking/REPO/AllBookingRepo.dart';
@@ -15,6 +16,9 @@ import '../../AllBooking/SCREEN/MyBooking.dart';
 import '../../CalenderScreen/BLOC/calender_bloc.dart';
 import '../../CalenderScreen/CalenderScreen.dart';
 import '../../CalenderScreen/Repositry/calendar_repository.dart';
+import '../../Home/BLOC/BookingCountBloc.dart';
+import '../../Home/REPO/HomeRepo.dart';
+import '../../Home/SCREENS/HomeScreen.dart';
 import '../../Profile/BLOC/profile_bloc.dart';
 import '../../Profile/Profile.dart';
 import '../../Profile/REPO/ProfileRepo.dart';
@@ -30,6 +34,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool obscurePassword = true;
   bool rememberMe = false;
+  final box = Hive.box('servicebox');
 
   @override
   void dispose() {
@@ -66,12 +71,13 @@ class _LoginScreenState extends State<LoginScreen> {
               SnackBar(content: Text("Login Successful!")),
             );
             // FIX: Wrap ProfileScreen with BlocProvider
+
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
                 builder: (context) => BlocProvider(
-                  create: (context) => AllBookingsBloc(AllBookingsRepository()),
-                  child: MyBookingMain(),
+                  create: (context) => BookingCountBloc(HomeRepo()),
+                  child: HomeScreen(),
                 ),
               ),
             );

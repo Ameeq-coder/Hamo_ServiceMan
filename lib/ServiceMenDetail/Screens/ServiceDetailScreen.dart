@@ -98,7 +98,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
         imagePath: _selectedImage!.path, // ✅ Fix applied here
       );
 
-      BlocProvider.of<ServiceDetailBloc>(context).add(
+      BlocProvider.of<ServiceDetailsBloc>(context).add(
         SubmitServiceDetailEvent(model),
       );
 
@@ -116,7 +116,7 @@ class _ServiceDetailScreenState extends State<ServiceDetailScreen> {
         title: const Text('Create Service Detail',
             style: TextStyle(color: Colors.black)),
       ),
-      body: BlocConsumer<ServiceDetailBloc, ServiceDetailState>(
+      body: BlocConsumer<ServiceDetailsBloc, ServiceDetailState>(
         listener: (context, state) {
           if (state is ServiceDetailSuccess) {
             ScaffoldMessenger.of(context).showSnackBar(
