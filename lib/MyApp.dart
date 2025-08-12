@@ -19,8 +19,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: BlocProvider(
-        create: (context) => AuthBloc(AuthRepository()),
-        child: ChatScreen(),
+        create: (context) => SignupBloc( signupRepository: SignupRepository()),
+        child: SignupScreen(),
       ),
     );
   }

@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hamo_service_man/Auth/BLOC/login_bloc.dart';
 import 'package:hamo_service_man/Auth/BLOC/login_event.dart';
 import 'package:hamo_service_man/Auth/BLOC/login_state.dart';
+import 'package:hamo_service_man/Auth/Screens/SignupScreen.dart';
 import 'package:hive/hive.dart';
 
 import '../../AllBooking/BLOC/all_bookings_bloc.dart';
@@ -22,6 +23,8 @@ import '../../Home/SCREENS/HomeScreen.dart';
 import '../../Profile/BLOC/profile_bloc.dart';
 import '../../Profile/Profile.dart';
 import '../../Profile/REPO/ProfileRepo.dart';
+import '../BLOC/signup_bloc.dart';
+import '../Repositry/SignupRepositry.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -180,36 +183,47 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Center(
-                    child: Text(
-                      "Forget the password?",
-                      style: TextStyle(color: Colors.deepPurple),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  Row(
-                    children: const [
-                      Expanded(child: Divider()),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text("or continue with"),
-                      ),
-                      Expanded(child: Divider()),
-                    ],
-                  ),
-                  const SizedBox(height: 20),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      SocialIcon(icon: FontAwesomeIcons.facebookF),
-                      SocialIcon(icon: FontAwesomeIcons.google),
-                      SocialIcon(icon: FontAwesomeIcons.apple),
-                    ],
-                  ),
+                  // const Center(
+                  //   child: Text(
+                  //     "Forget the password?",
+                  //     style: TextStyle(color: Colors.deepPurple),
+                  //   ),
+                  // ),
+                  // const SizedBox(height: 20),
+                  // Row(
+                  //   children: const [
+                  //     Expanded(child: Divider()),
+                  //     Padding(
+                  //       padding: EdgeInsets.symmetric(horizontal: 8.0),
+                  //       child: Text("or continue with"),
+                  //     ),
+                  //     Expanded(child: Divider()),
+                  //   ],
+                  // ),
+                  // const SizedBox(height: 20),
+                  // const Row(
+                  //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  //   children: [
+                  //     SocialIcon(icon: FontAwesomeIcons.facebookF),
+                  //     SocialIcon(icon: FontAwesomeIcons.google),
+                  //     SocialIcon(icon: FontAwesomeIcons.apple),
+                  //   ],
+                  // ),
                   const SizedBox(height: 20),
                   Center(
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => BlocProvider(
+                              create: (_) => SignupBloc( signupRepository: SignupRepository()),
+                              child:  SignupScreen(),
+                            ),
+                          ),
+                        );
+
+                      },
                       child: const Text.rich(
                         TextSpan(
                           text: "Don't have an account? ",

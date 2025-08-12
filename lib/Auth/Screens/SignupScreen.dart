@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hamo_service_man/Auth/Repositry/SignupRepositry.dart';
+import 'package:hamo_service_man/Auth/Screens/Login.dart';
 import 'package:hive/hive.dart';
 import 'package:hive/hive.dart';
 import '../../ServiceMenDetail/BLOC/service_detail_bloc.dart';
 import '../../ServiceMenDetail/REPO/ServiceDetailRepository.dart';
 import '../../ServiceMenDetail/Screens/ServiceDetailScreen.dart';
+import '../BLOC/login_bloc.dart';
+import '../Repositry/login_repository.dart';
 import '../bloc/signup_bloc.dart';
 import '../bloc/signup_event.dart';
 import '../bloc/signup_state.dart';
@@ -237,6 +240,36 @@ class _SignupScreenState extends State<SignupScreen> {
                     );
                   },
                 ),
+                SizedBox(height: 15),
+
+                Center(
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => BlocProvider(
+                            create: (_) => AuthBloc(AuthRepository()),
+                            child:  LoginScreen(),
+                          ),
+                        ),
+                      );
+
+                    },
+                    child: const Text.rich(
+                      TextSpan(
+                        text: "Already have an account? ",
+                        children: [
+                          TextSpan(
+                            text: "Sign up",
+                            style: TextStyle(color: Colors.deepPurple),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
               ],
             ),
           ),

@@ -255,46 +255,46 @@ class HomeScreen extends StatelessWidget {
                                                     ],
                                                   ),
                                                 ),
-                                                BlocBuilder<InviteBloc, InviteState>(
-                                                  builder: (context, inviteState) {
-                                                    bool isLoading = inviteState is InviteLoading;
-
-                                                    return ElevatedButton(
-                                                      onPressed: isLoading ? null : () {
-                                                        final box = Hive.box('servicebox');
-                                                        final currentServiceManId = box.get('servicemanid');
-
-                                                        if (currentServiceManId != null) {
-                                                          context.read<InviteBloc>().add(
-                                                            SendInviteEvent(
-                                                              servicemanId: currentServiceManId.toString(),
-                                                              userId: user.userId.toString(), // Assuming user has an id field
-                                                            ),
-                                                          );
-                                                        }
-                                                        print(currentServiceManId);
-                                                        print(user.userId.toString());
-                                                      },
-                                                      style: ElevatedButton.styleFrom(
-                                                        backgroundColor: isLoading ? Colors.grey : Colors.deepPurple,
-                                                        shape: RoundedRectangleBorder(
-                                                          borderRadius: BorderRadius.circular(12),
-                                                        ),
-                                                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                                                      ),
-                                                      child: isLoading
-                                                          ? const SizedBox(
-                                                        width: 16,
-                                                        height: 16,
-                                                        child: CircularProgressIndicator(
-                                                          strokeWidth: 2,
-                                                          valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                                                        ),
-                                                      )
-                                                          : const Text('Invite', style: TextStyle(color: Colors.white)),
-                                                    );
-                                                  },
-                                                ),
+                                                // BlocBuilder<InviteBloc, InviteState>(
+                                                //   builder: (context, inviteState) {
+                                                //     bool isLoading = inviteState is InviteLoading;
+                                                //
+                                                //     return ElevatedButton(
+                                                //       onPressed: isLoading ? null : () {
+                                                //         final box = Hive.box('servicebox');
+                                                //         final currentServiceManId = box.get('servicemanid');
+                                                //
+                                                //         if (currentServiceManId != null) {
+                                                //           context.read<InviteBloc>().add(
+                                                //             SendInviteEvent(
+                                                //               servicemanId: currentServiceManId.toString(),
+                                                //               userId: user.userId.toString(), // Assuming user has an id field
+                                                //             ),
+                                                //           );
+                                                //         }
+                                                //         print(currentServiceManId);
+                                                //         print(user.userId.toString());
+                                                //       },
+                                                //       style: ElevatedButton.styleFrom(
+                                                //         backgroundColor: isLoading ? Colors.grey : Colors.deepPurple,
+                                                //         shape: RoundedRectangleBorder(
+                                                //           borderRadius: BorderRadius.circular(12),
+                                                //         ),
+                                                //         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                                                //       ),
+                                                //       child: isLoading
+                                                //           ? const SizedBox(
+                                                //         width: 16,
+                                                //         height: 16,
+                                                //         child: CircularProgressIndicator(
+                                                //           strokeWidth: 2,
+                                                //           valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                                                //         ),
+                                                //       )
+                                                //           : const Text('Invite', style: TextStyle(color: Colors.white)),
+                                                //     );
+                                                //   },
+                                                // ),
                                               ],
                                             ),
                                           );

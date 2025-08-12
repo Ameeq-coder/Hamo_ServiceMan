@@ -11,6 +11,9 @@ import '../AllBooking/SCREEN/MyBooking.dart';
 import '../Auth/Repositry/login_repository.dart';
 import '../CalenderScreen/CalenderScreen.dart';
 import '../CalenderScreen/Repositry/calendar_repository.dart';
+import '../Chat/BLOC/chat_bloc.dart';
+import '../Chat/REPO/chat_repository.dart';
+import '../Chat/Screen/ChatList.dart';
 import '../Home/BLOC/BookingCountBloc.dart';
 import '../Home/BLOC/BookingCountEvent.dart';
 import '../Home/BLOC/invite_bloc.dart';
@@ -85,7 +88,15 @@ class BottomNavigation extends StatelessWidget {
         );
         break;
       case 3:
-      // Get.to(() => UserFavorites());
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => BlocProvider(
+              create: (_) => ChatBloc(ChatRepository()),
+              child:  ChatScreen(),
+            ),
+          ),
+        );
         break;
       case 4:
         Navigator.pushReplacement(

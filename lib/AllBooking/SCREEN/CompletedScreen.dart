@@ -28,7 +28,7 @@ class _CompletedBookingsScreenState extends State<CompletedBookingsScreen> {
             isExpanded = List.generate(completed.length, (_) => false);
           }
 
-          return _buildBookingList(context, completed, "Completed");
+          return _buildBookingList(context, completed, "completed");
         } else if (state is AllBookingsError) {
           return const Center(child: Text('Error loading bookings'));
         }
